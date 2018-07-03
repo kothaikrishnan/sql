@@ -1,0 +1,49 @@
+
+(INNER)JOIN:
+3 table
+ select O.orderID,O.orderDate, 
+       E.firstname, D.Quantity,O.shipperID 
+  from Orders O 
+  join OrderDetails D ON O.orderID = D.orderId 
+  join Employees E ON E.EmployeeID=O.EmployeeID
+order by D.OrderDetailID;
+
+2 table
+select O.orderID,O.orderDate, 
+        D.Quantity,O.shipperID 
+  from Orders O 
+  inner join OrderDetails D ON O.orderID = D.orderId 
+order by D.OrderDetailID;
+
+
+LEFT JOIN: 
+
+select O.orderID,O.orderDate, 
+        D.Quantity,O.shipperID 
+  from Orders O 
+  left join OrderDetails D ON O.orderID = D.orderId 
+order by D.OrderDetailID;
+
+RIGHT JOIN:
+
+select O.orderID,O.orderDate, 
+        D.Quantity,O.shipperID 
+  from Orders O 
+  right join OrderDetails D ON O.orderID = D.orderId 
+order by D.OrderDetailID;
+
+FULL OUTER JOIN:
+
+select O.orderID,O.orderDate, 
+        D.Quantity,O.shipperID 
+  from Orders O 
+  full outer join OrderDetails D ON O.orderID = D.orderId 
+order by D.OrderDetailID;
+
+SELF JOIN:
+
+SELECT A.orderID,B.orderID,B.orderDate, 
+       B.shipperID 
+  FROM Orders A,Orders B 
+ WHERE A.orderID <> B.orderID
+ORDER BY A.OrderID;
