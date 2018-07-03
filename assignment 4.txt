@@ -1,0 +1,16 @@
+Inserting values into new table by Joining Three tables:
+
+create table old_student_list(rollno int,stud_name char(30),doj date,department varchar(20));
+
+create table new_student_list(rollno int,stud_name char(40),doj date,department varchar(10));
+
+create table admin(rollno int,stud_name char(50),doj date,phoneno int,department varchar(10),address varchar(10));
+
+create table target(rollno int,stud_name char(40),doj date,department varchar(40),phoneno int,address varchar(20));
+
+
+insert into target(rollno,stud_name,doj,department,phoneno,address)
+select o.rollno,o.stud_name,n.doj,n.department,a.phoneno,a.address
+from old_student_list o inner join new_student_list n on o.rollno=n.rollno
+inner join  admin a on a.rollno=n.rollno where n.department='IT';
+
