@@ -1,0 +1,149 @@
+
+DDL-Data Definition Language
+
+/*To create  table*/
+
+create table OrderList(order_ID number(20),customer_ID number(30),orderdate varchar(50));
+
+create table Persons(
+    person_ID int ,
+    LastName varchar(25) not null,
+    FirstName varchar(25),
+    Age int not null,
+    constraint persons_pk primary key (person_ID));
+
+
+create table Person(
+    person_ID int ,
+    LastName varchar(25) not null,
+    FirstName varchar(25),
+    Age int not null,
+    primary key (person_ID));
+
+
+/* to rename table or column,to add column,to modify column datatype, to drop column*/
+
+alter table TestDB rename to Employee;
+
+alter table Employee add column phone_no number(10);
+
+
+/*to remove both records and table structure*/
+
+drop table Employee;
+
+
+DML-Data Manipulation Language
+
+/* to insert values*/
+
+insert into customer values(20,'divya','mumbai');
+
+
+/* to update records*/
+
+update customer set city='mumbai' where city='bihar';
+
+
+/*to delete all records but table structure remains*/
+
+delete from Employee;
+
+delete from TestDB where order_ID=1000;
+
+
+/*To display all records*/
+
+select * from customer;
+
+
+/* to display particular rows*/
+
+select * from customer where customer_name='divya';
+
+/* using inner join*/
+
+select OrderList.order_ID,customer.customer_ID,customer.city from  OrderList inner join customer on OrderList.customer_ID=customer.customer_ID; 
+
+/* using left join*/
+
+select OrderList.order_ID,customer.customer_ID,customer.city from  customer left join OrderList on OrderList.customer_ID=customer.customer_ID; 
+
+order_ID customer_ID city
+10	1	chennai
+11	2	pune
+12	3	vellore
+13	4	bangalore
+14	5	kerala
+15	6	pune
+16	7	bangalore
+17	8	hydrebad
+15	9	delhi
+15	10	chennai
+null	11	UP
+null	12	chennai
+null	13	bangalore
+null	14	MP
+null	15	bihar
+null	16	bihar
+null	17	chennai
+null	18	bangalore
+null	19	chennai
+null	20	mumbai
+
+
+/* to display within the ranges*/
+
+select * from orders where orderDate between '1996-01-01' and '1996-12-01';
+
+select * from orders where orderDate >='1997-01-01' and orderDate <='1997-12-01';
+
+
+/* to sort result-set in ascending or descending order*/
+
+select * from orders where EmployeeID=5 order by OrderID desc;
+
+
+/* using group by */
+ 
+select ProductID,max(price) from products group by ProductID having price>=18;
+
+select ProductID,sum(price) from products group by ProductID having ProductId=5;
+
+select ProductID,SupplierID,max(price) from products where SupplierID=7 group by ProductID having price>=18;
+
+select count(*) from orderList;
+
+select count(*) from customer where city='chennai' ;
+
+
+/* used to compare values to similar values*/
+
+select * from customer where customer_name like'd%';
+
+select * from customer where customer_name like'_a%';
+
+
+/*to display null or not null values in the records*/
+
+select * from Employee where phone_no is null;
+
+select * from Employee where phone_no is not null;
+
+
+/* used combine multiple conditions*/
+
+select * from OrderList where orderdate='2005-10-08'and order_ID=16;(both the condition are true)
+
+select * from OrderList where orderdate='2005-10-08' or order_ID=17;(anyone of the condition is true)
+
+/* to display distinct values*/
+
+select distinct city from customer;
+
+/* using in or not in */
+
+select * from customer where city in('chennai','bangalore');
+
+select * from customer where city not in('chennai','bangalore');
+
