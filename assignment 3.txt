@@ -1,0 +1,212 @@
+
+STUDENT_LIST table:
+1. Insert 20 Records into Student table (insert should be Subject 5). 
+Other three fields should be populated based on the below condition
+
+select * from student_list;
+
+reg_no|stud_name|sub1|sub2|sub3|sub4|sub5
+1000|kothai|50|60|50|45|83
+
+1001|divya|55|95|83|73|100
+
+1002|ram|35|40|71|41|80
+
+1003|priya|21|34|75|63|41
+
+1004|padma|38|65|95|54|37
+
+1005|lavanya|67|45|22|50|40
+
+1006|shiva|38|15|25|39|37
+
+1007|kavi|27|15|65|75|45
+
+1008|rithesh|45|74|35|44|87
+
+1009|rakesh|43|35|90|79|71
+
+1010|sathish|56|78|93|92|90
+
+1011|yamuna|35|67|32|65|84
+
+1012|pradeep|23|15|81|51|41
+
+1013|lakshmi|94|88|81|71|63
+
+1014|john|15|80|51|41|32
+
+1015|manju|60|40|61|84|95
+
+1016|bharathi|88|35|65|44|77
+
+1017|kumar|88|35|65|84|97
+
+1018|vanitha|58|15|35|74|87
+
+1019|yakesh|82|75|55|24|67
+
+2. Sum all the subjects mark and store the values into the total field.
+
+update student_list set total=(sub1+sub2+sub3+sub4+sub5);
+
+reg_no|stud_name|sub1|sub2|sub3|sub4|sub5|total
+1000|kothai|50|60|50|45|83|288
+
+1001|divya|55|95|83|73|100|406
+
+1002|ram|35|40|71|41|80|267
+
+1003|priya|21|34|75|63|41|234
+
+1004|padma|38|65|95|54|37|289
+
+1005|lavanya|67|45|22|50|40|224
+
+1006|shiva|38|15|25|39|37|154
+
+1007|kavi|27|15|65|75|45|227
+
+1008|rithesh|45|74|35|44|87|285
+
+1009|rakesh|43|35|90|79|71|318
+
+1010|sathish|56|78|93|92|90|409
+
+1011|yamuna|35|67|32|65|84|283
+
+1012|pradeep|23|15|81|51|41|211
+
+1013|lakshmi|94|88|81|71|63|397
+
+1014|john|15|80|51|41|32|219
+
+1015|manju|60|40|61|84|95|340
+
+1016|bharathi|88|35|65|44|77|309
+
+1017|kumar|88|35|65|84|97|369
+
+1018|vanitha|58|15|35|74|87|269
+
+1019|yakesh|82|75|55|24|67|303
+
+3.Check each subject >35 set Result as "Pass" else "Fail"
+
+update student_list set result=
+case 
+when sub1>=35 and sub2>=35 and sub3>=35 and sub4>=35 and sub5>=35 then "pass"
+ else "fail"
+ end;
+ 
+reg_no|stud_name|sub1|sub2|sub3|sub4|sub5|sub6|total|result
+1000|kothai|50|60|50|45|83|288|pass
+
+1001|divya|55|95|83|73|100|406|pass
+
+1002|ram|35|40|71|41|80|267|pass
+
+1003|priya|21|34|75|63|41|234|fail
+
+1004|padma|38|65|95|54|37|289|pass
+
+1005|lavanya|67|45|22|50|40|224|fail
+
+1006|shiva|38|15|25|39|37|154|fail
+
+1007|kavi|27|15|65|75|45|227|fail
+
+1008|rithesh|45|74|35|44|87|285|pass
+
+1009|rakesh|43|35|90|79|71|318|pass
+1010|sathish|56|78|93|92|90|409|pass
+
+1011|yamuna|35|67|32|65|84|283|fail
+
+1012|pradeep|23|15|81|51|41|211|fail
+
+1013|lakshmi|94|88|81|71|63|397|pass
+
+1014|john|15|80|51|41|32|219|fail
+
+1015|manju|60|40|61|84|95|340|pass
+
+1016|bharathi|88|35|65|44|77|309|pass
+
+1017|kumar|88|35|65|84|97|369|pass
+
+1018|vanitha|58|15|35|74|87|269|fail
+
+1019|yakesh|82|75|55|24|67|303|fail
+
+
+4.Rank the studen who's Results are "Pass"
+
+select reg_no,stud_name,sub1,sub2,sub3,sub4,total,result,rank() over(order by total desc) as rank from student_list;
+
+5.Set the Rank to as 0 ,if the Results is "Fail"
+
+update student_list set rank='0' where result='fail';
+
+reg_no|stud_name|sub1|sub2|sub3|sub4|sub5|total|result|rank
+1000|kothai|50|60|50|45|83|288|pass|
+
+1001|divya|55|95|83|73|100|406|pass|
+
+1002|ram|35|40|71|41|80|267|pass|
+
+1003|priya|21|34|75|63|41|234|fail|0
+
+1004|padma|38|65|95|54|37|289|pass|
+
+1005|lavanya|67|45|22|50|40|224|fail|0
+
+1006|shiva|38|15|25|39|37|154|fail|0
+
+1007|kavi|27|15|65|75|45|227|fail|0
+
+1008|rithesh|45|74|35|44|87|285|pass|
+
+1009|rakesh|43|35|90|79|71|318|pass|
+
+1010|sathish|56|78|93|92|90|409|pass|
+
+1011|yamuna|35|67|32|65|84|283|fail|0
+
+1012|pradeep|23|15|81|51|41|211|fail|0
+
+1013|lakshmi|94|88|81|71|63|397|pass|
+
+1014|john|15|80|51|41|32|219|fail|0
+
+1015|manju|60|40|61|84|95|340|pass|
+
+1016|bharathi|88|35|65|44|77|309|pass|
+
+1017|kumar|88|35|65|84|97|369|pass|
+
+1018|vanitha|58|15|35|74|87|269|fail|0
+
+1019|yakesh|82|75|55|24|67|303|fail|0
+
+EMPLOYEE_MONTHLY_BONUS table:
+
+1.Calculate salary based on the NoofdaysWorked and one day salary as 1000
+update Emp_monthly_bonus set salary=no_days_worked*1000;
+
+2.Calculate bonus of 40%, if employee attended for 25 days
+update Emp_monthly_bonus set bonus=salary*40/100 where no_days_worked>=25;
+
+3.Calculate bouns of 30% , if employee attended for 20 days.
+update Emp_monthly_bonus set bonus=salary*30/100 where no_days_worked>=20 and no_days_worked<25;
+
+4.No bouns if employee less than 20 days
+update Emp_monthly_bonus set bonus=salary where no_days_worked<20;
+
+emp_no	emp_name	doj	no_days_worked	salary	bonus
+10	shakshi	2000-01-18	25	       25000	10000
+11	shakti	2005-01-12	23	       23000	6900
+12	divya	2003-04-12	25	       25000	10000
+13	kumar	2002-04-12	15	       15000	15000
+14	raj	2001-08-12	20	       20000	6000
+15	raj	2003-08-11	13	       13000	13000
