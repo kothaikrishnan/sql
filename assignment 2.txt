@@ -1,0 +1,60 @@
+Write An SQL Query To Fetch “FIRST_NAME” From Worker Table Using The Alias Name As <WORKER_NAME>.
+1.select first_name as worker_name from worker;
+
+Write An SQL Query To Fetch Unique Values Of DEPARTMENT From Worker Table
+2.select distinct department from worker;
+
+SQL Query To Print First Three Characters Of  FIRST_NAME From Worker Table.
+3.select substring(first_name,1,3) from worker;
+
+An SQL Query To Find The Position Of The Alphabet (‘A’) In The First Name Column ‘Amitabh’ From Worker Table.
+4.select position("a" in "amitabh") as matchposition;
+select position("a" in first_name) from worker;
+
+The FIRST_NAME From Worker Table After Removing White Spaces From The Right Side.
+5.update worker set first_name=rtrim(first_name);
+
+An SQL Query That Fetches The Unique Values Of DEPARTMENT From Worker Table And Prints Its Length.
+6.select distinct department,length(department) from worker;
+
+SQL Query To Print The FIRST_NAME From Worker Table After Replacing ‘a’ With ‘A’.
+7.select replace(first_name,'a','A')from worker;
+
+An SQL Query To Print The FIRST_NAME And LAST_NAME From Worker Table Into A Single Column COMPLETE_NAME.
+ A Space Char Should Separate Them.
+8a.select first_name||' '||last_name as complete_name from worker;
+
+8b.select concat(first_name,' ',last_name)as complete_name from worker;
+
+Print Details Of Workers With DEPARTMENT Name As “Admin”.
+9.select Worker_ID,first_name,last_name,salary,joining_date,department as Admin from Worker;
+
+Write An SQL Query To Print Details Of The Workers Whose FIRST_NAME Ends With ‘A’
+10.select * from Worker where First_name like'%a';
+
+Write An SQL Query To Print Details Of The Workers Whose FIRST_NAME Ends With ‘H’ And Contains Six Alphabets.
+11.select * from Worker where First_name like'_____h';
+
+Write An SQL Query To Print Details Of The Workers Who Are Also Managers
+12.select worker.*
+from worker inner join Title 
+on worker.worker_ID=Title.Worker_Ref_ID 
+where Worker_Title='manager';
+
+An SQL Query To Fetch Duplicate Records Having Matching Data In Some Fields Of A Table
+13.select worker_ref_ID,worker_title,count(*) from Title group by Worker_ref_ID having count(*)>1;(for worker table)
+  select worker_ref_ID,count(worker_ref_ID) as count_worker_ID from Title group by worker_ref_ID having count(worker_ref_ID>1);(for title table)
+
+Write An SQL Query To Show Only Odd Rows From A Table
+14.select * from worker where(rowID % 2)=1;
+
+Write An SQL Query To Show The Top N (Say 10) Records Of A Table.
+15a.select * from worker limit 10;
+
+15b.select top 10 from worker;
+
+Write An SQL Query To Determine The Nth (Say N=5) Highest Salary From A Table.
+16.select distinct top 5 salary from worker order by salary desc;
+
+Write An SQL Query To Fetch The List Of Employees With The Same Salary.
+17.select first_name,salary from worker where salary in(select salary from worker group by salary having count(salary)>1);
